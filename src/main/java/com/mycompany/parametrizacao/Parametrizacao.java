@@ -3,7 +3,7 @@
  */
 
 package com.mycompany.parametrizacao;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Usuario
@@ -14,23 +14,21 @@ public class Parametrizacao {
         String expressao, exp_filtrada;
         FuncPilha fp = new FuncPilha();
         
-        expressao = "{Salve{} Rapaziada [Todos Tranquilos? (Vocês são Feras)]}";
-        
+        expressao = JOptionPane.showInputDialog("Digite a Expressão");
         exp_filtrada = expressao.replaceAll("[^(){}\\[\\]]", "");
         
-        System.out.println("Frase: "+expressao);
-        System.out.println("Frase Filtrada: "+exp_filtrada);
-
-        char[] exp = exp_filtrada.toCharArray();
-        
-        for (char i : exp) {
-            //fp.push(i);
-            System.out.println("Array de caracteres: "+ i);
+        String[] exp = new String[exp_filtrada.length()];       
+        for (int i = 0; i < exp_filtrada.length(); i++) {
+            exp[i] = String.valueOf(exp_filtrada.charAt(i));
         }
         
-        if(fp.getStatus() == 0){
-            System.out.print("\n\nExprecao Incorreta");
+        for (String i : exp) {
+            fp.push(i);
         }
         
+        System.out.print("\n\n============ Resultado ============\n");
+        System.out.println("Expressao: "+expressao);
+        System.out.println("Status: "+fp.verificarExp());
+        System.out.println("===================================");
     }
 }
